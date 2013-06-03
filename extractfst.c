@@ -1,5 +1,5 @@
 /*****************************************************************************
-	fstextract (main.c)
+	extractfst (main.c)
 
 	This is a simple program to find and extract a file from a .FST file.
 	It assumes that you already know the name of the file you wish to
@@ -53,37 +53,26 @@ char path[_MAX_PATH], drv[_MAX_DRIVE], dir[_MAX_DIR], fname[_MAX_FNAME], ext[_MA
 
 
 
-void main(int argc, char *argv[])
-{
+void extract_fst_file(char* infilepath, char* filetoextract, char* outfilepath) {
 	int x;	
 	int idx;
 	int bytesread;
 	int byteswritten;
 	int err;
 	int ReadSize;
-
-
-	printf("-- fstextract -- read and extract a file from an FST or DPK file --\n\n");
-
-	// If user didn't type in the correct number of parameters, spew the usage info
-	if(argc != 4)
-	{
-		printf("Usage: fstextract <FST file> <file to extract> <file to create>\n\n");
-		printf("    The name of the file to extract should *not* contain path info.\n");
-		printf("    fstextract will ignore any directory path given it.\n");
-		exit(0);
-	}
+        
+        printf("Usage: fstextract <FST file> <file to extract> <file to create>\n\n");
 
 	// Try to open the input and output files
-	if((infile = fopen(argv[1],"rb")) == NULL)
+	if((infile = fopen(infilepath, "rb")) == NULL)
 	{
-		printf("Can't open input FST file '%s'\n",argv[1]);
+		printf("Can't open input FST file '%s'\n", infilepath);
 		exit(1);
 	}
 
-	if((outfile = fopen(argv[3], "wb")) == NULL)
+	if((outfile = fopen(outfilepath, "wb")) == NULL)
 	{
-		printf("Can't open output file '%s'\n",argv[3]);
+		printf("Can't open output file '%s'\n", outfilepath);
 		exit(1);
 	}
 
@@ -116,7 +105,7 @@ void main(int argc, char *argv[])
 	// (These functions are DOS functions, and so will likely not work on say Linux,
 	// but then, the game itself doesn't have a Linux version that I know of. might
 	// still work under wine though)
-	_splitpath(argv[2],NULL,NULL,fname,ext);
+	_splitpath(filetoextract,NULL,NULL,fname,ext);
 	_makepath(seekname,NULL,NULL,fname,ext);
 
 	// Search for the given file in the FST's TOC

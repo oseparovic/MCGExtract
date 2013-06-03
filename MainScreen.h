@@ -16,6 +16,8 @@ public:
     virtual ~MainScreen();
 public Q_SLOTS: //slots to receive action of menu trigger.
     void actionOpen();
+    void actionExtract_All();
+    void actionExtract_Index();
 private:
     Ui::MainScreen widget;
 };

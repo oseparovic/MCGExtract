@@ -52,6 +52,8 @@
     <property name="title">
      <string>Extract</string>
     </property>
+    <addaction name="actionExtract_All"/>
+    <addaction name="actionExtract_Index"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuExtract"/>
@@ -60,6 +62,16 @@
   <action name="actionOpen">
    <property name="text">
     <string>Open</string>
+   </property>
+  </action>
+  <action name="actionExtract_All">
+   <property name="text">
+    <string>Extract All</string>
+   </property>
+  </action>
+  <action name="actionExtract_Index">
+   <property name="text">
+    <string>Extract Index</string>
    </property>
   </action>
  </widget>

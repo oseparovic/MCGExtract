@@ -30,7 +30,13 @@ MainScreen::MainScreen() {
     
     widget.setupUi(this);
     widget.tableWidget->horizontalHeader()->setStretchLastSection(true); // stretch the column to width
+    widget.actionExtract_All->setEnabled(false); // disable extraction until a file is opened
+    widget.actionExtract_Index->setEnabled(false); // disable extraction until a file is opened
+    
+    // wire up the menu actions
     connect(widget.actionOpen, SIGNAL(triggered()), this, SLOT(actionOpen()));
+    connect(widget.actionExtract_All, SIGNAL(triggered()), this, SLOT(actionExtract_All()));
+    connect(widget.actionExtract_Index, SIGNAL(triggered()), this, SLOT(actionExtract_Index()));
     
     MCGFile *object2pak = new MCGFile();
     object2pak->size = 1189;
@@ -128,6 +134,15 @@ MainScreen::~MainScreen() {
 void MainScreen::actionOpen() {
     // bring up the file opener
     QString filePath = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("Files (*.*)"));
+    if (filePath.toStdString().empty()) {
+        // cancel was pressed do nothing
+        return;
+    }
+    
+    // enable the extraction menu
+    widget.actionExtract_All->setEnabled(true);
+    widget.actionExtract_Index->setEnabled(true);
+    
     QFileInfo fileInfo = filePath;
     QString qFileName = fileInfo.fileName();
     string fileName = qFileName.toStdString();
@@ -138,16 +153,23 @@ void MainScreen::actionOpen() {
     } else {
         MCGFile *temp = fileMap.find(fileName)->second;
         int count = 0;
-        char buffer [5];
         for(vector<string>::const_iterator i = temp->dir.begin();i != temp->dir.end(); ++i) {
             string fileName = *i;
-//            QMessageBox::warning(this, "Index mapping error", fileName.c_str());
             widget.tableWidget->setHidden(false);
             widget.tableWidget->setRowCount(temp->size);
             widget.tableWidget->setColumnCount(1);
-//            widget.tableWidget->setItem(count, 0, new QTableWidgetItem(itoa(count,buffer,10)));
             widget.tableWidget->setItem(count, 0, new QTableWidgetItem(fileName.c_str()));
             count++;
         }        
     }    
+}
+
+void MainScreen::actionExtract_All() {
+    // Extract the entire contents of the file
+    QMessageBox::warning(this, "Error", "Function not yet implemented");
+}
+
+void MainScreen::actionExtract_Index() {
+    // Extract the file at the specified index
+    QMessageBox::warning(this, "Error", "Function not yet implemented");
 }

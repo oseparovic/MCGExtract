@@ -1,5 +1,5 @@
 /*****************************************************************************
-	extractfst (main.c)
+	fstextract.c (main.c)
 
 	This is a simple program to find and extract a file from a .FST file.
 	It assumes that you already know the name of the file you wish to

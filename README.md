@@ -10,6 +10,8 @@ Task List
 ---------
 
 - [x] initial UI menu and table setup
+- [x] push all relevant utility source code
+- [ ] find a way to use lzcompress and lzdecomp without needing to use Visual Studio for it's handling of the `_asm` define.
 - [ ] determine a proper way to populate file indices and implement. Currently just listing them from indices built by myself and scrivener
 - [ ] wire up the FST extraction code to the UI
 - [ ] wire up the PAK extraction code to the UI (need to get it from CMunsta first)

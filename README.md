@@ -5,7 +5,6 @@ MCGExtract is a QT based GUI crossplatform application that will assist with vie
 
 The GUI will be powered by CMunsta's command line based extraction utilities. You can see a full list of them and their sources on [his website][1].
 
-
 Task List
 ---------
 
@@ -21,6 +20,7 @@ Setup
 -----
 
 __1.__      Install a QT development IDE. I'm using this version of [Netbeans][2].
+
 __2.__      Run your project! If you've followed the steps above it should be that simple.
 
 
